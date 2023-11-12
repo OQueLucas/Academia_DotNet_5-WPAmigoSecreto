@@ -15,6 +15,7 @@ namespace WindowsFormAmigoSecreto
 
             return (vetor[0] + "." + vetor[^1] + "@ufn.com.br").ToLower();
         }
+
         public static bool EmailIsValid(string email)
         {
             if (string.IsNullOrWhiteSpace(email))

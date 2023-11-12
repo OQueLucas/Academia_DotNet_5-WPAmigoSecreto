@@ -126,8 +126,7 @@ namespace WindowsFormAmigoSecreto
         {
             if (e.KeyChar == '\r')
             {
-                Persistencia.CSVRemovePessoa(textBox_ExcluirPessoa.Text);
-                LoadListView();
+                ExcluirPessoa();
             }
             if (e.KeyChar == (char)Keys.Escape)
             {
@@ -137,7 +136,13 @@ namespace WindowsFormAmigoSecreto
 
         private void button_Excluir_Click(object sender, EventArgs e)
         {
-            Persistencia.CSVRemovePessoa(textBox_ExcluirPessoa.Text);
+            ExcluirPessoa();
+        }
+
+        public void ExcluirPessoa()
+        {
+            Persistencia.CSVRemovePessoa(listPessoas, textBox_ExcluirPessoa.Text);
+            textBox_ExcluirPessoa.Text = "";
             LoadListView();
         }
     }

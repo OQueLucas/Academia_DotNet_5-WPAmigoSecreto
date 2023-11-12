@@ -7,7 +7,6 @@ namespace WindowsFormAmigoSecreto
     internal class Persistencia
     {
         static readonly string pathPessoas = @"..\..\..\Data\pessoas.csv";
-        static readonly string tempFile = @"..\..\..\Data\pessoastemp.csv";
         static readonly string pathAmigoSecreto = @"..\..\..\Data\amigoSecreto.csv";
 
         public static void CSVReaderPessoas(List<Pessoa> pessoas)
@@ -44,7 +43,6 @@ namespace WindowsFormAmigoSecreto
             {
                 streamWriter = File.Exists(pathPessoas) ? File.AppendText(pathPessoas) : File.CreateText(pathPessoas);
                 streamWriter.WriteLine(pessoa);
-
             }
             catch (Exception e)
             {
@@ -98,32 +96,38 @@ namespace WindowsFormAmigoSecreto
             }
         }
 
-        public static void CSVRemovePessoa(string nome)
+        public static void CSVRemovePessoa(List<Pessoa> listPessoas, string input)
         {
             try
             {
-                List<Pessoa> pessoas = new();
-                CSVReaderPessoas(pessoas);
+                Pessoa pessoa;
+                CSVReaderPessoas(listPessoas);
 
-                if (pessoas.Count == 0)
+                if (listPessoas.Count == 0)
                 {
                     MessageBox.Show("Não tem ninguém na lista!");
                     return;
                 }
-                Pessoa pessoa = pessoas.FirstOrDefault(p => p.Nome == nome);
 
-                if (pessoa == null)
+                if (Util.EmailIsValid(input))
                 {
-                    MessageBox.Show($"{nome} não encontrada!");
-                    return;
+                    pessoa = listPessoas.FirstOrDefault(p => p.Email == input);
                 }
                 else
                 {
-                    MessageBox.Show($"{nome} foi excluído com sucesso!");
+                    pessoa = listPessoas.FirstOrDefault(p => p.Nome == input);
                 }
-                pessoas.Remove(pessoa);
 
-                CSVWriterPessoa(pessoas);
+                if (pessoa == null)
+                {
+                    MessageBox.Show($"Pessoa não encontrada!");
+                    return;
+                }
+
+                MessageBox.Show($"{pessoa.Nome} foi excluído com sucesso!");
+                listPessoas.Remove(pessoa);
+
+                CSVWriterPessoa(listPessoas);
             }
             catch (Exception e)
             {
