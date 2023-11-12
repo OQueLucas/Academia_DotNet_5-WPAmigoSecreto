@@ -1,8 +1,10 @@
+using System.Security.Cryptography.Xml;
+
 namespace WindowsFormAmigoSecreto
 {
     public partial class Form_Principal : Form
     {
-        List<Pessoa> pessoas = new();
+        List<Pessoa> listPessoas = new();
         public Form_Principal()
         {
             InitializeComponent();
@@ -16,17 +18,47 @@ namespace WindowsFormAmigoSecreto
             }
         }
 
-        private void ColocarListaTextBox()
+        private void Button_cadastrar_Click(object sender, EventArgs e)
         {
-            listView_pessoas.Items.Clear();
+            Cadastrar();
+        }
 
-            foreach (Pessoa p in pessoas)
+        private void GerarAmigoSecretoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
             {
-                string[] items = { p.Nome, p.Email };
+                Persistencia.CSVReaderPessoas(listPessoas);
 
-                listView_pessoas.Items.Add(new ListViewItem(items));
+                Random rng = new();
+
+                List<Pessoa> listAmigos = listPessoas.ToList();
+
+                List<AmigoSecreto> listAmigosSecretos = new();
+
+                foreach (Pessoa pessoa in listPessoas)
+                {
+                    int random = rng.Next(0, listAmigos.Count);
+                    Pessoa amigo = listAmigos.ElementAt(random);
+
+                    if (pessoa != amigo)
+                    {
+                        listAmigosSecretos.Add(new(pessoa, amigo));
+                        listAmigos.Remove(amigo);
+                    }
+                    else
+                    {
+                        throw new Exception("Gere novamente, alguém tirou a si mesmo");
+                    }
+                }
+
+                Persistencia.CSVWriterAmigo(listAmigosSecretos);
+
+                MessageBox.Show("Lista gerada com sucesso!");
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().Name);
+            }
         }
 
         private void Cadastrar()
@@ -43,21 +75,70 @@ namespace WindowsFormAmigoSecreto
 
             Pessoa p = new(nome);
 
-            if (pessoas.Contains(p))
+            if (listPessoas.Contains(p))
             {
+                MessageBox.Show("Essa pessoa já foi cadastrada!", "Já cadastrado");
                 return;
             }
 
-            pessoas.Add(p);
-            pessoas.Sort((a, b) => a.Nome.CompareTo(b.Nome));
+            listPessoas.Add(p);
+            listPessoas.Sort((a, b) => a.Nome.CompareTo(b.Nome));
 
-            ColocarListaTextBox();
+            Persistencia.CSVWriterPessoa(p);
+
+            LoadListView();
             textBox_NomeCompleto.Text = "";
         }
 
-        private void button_cadastrar_Click(object sender, EventArgs e)
+        private void LoadListView()
         {
-            Cadastrar();
+            listView_pessoas.Items.Clear();
+
+            Persistencia.CSVReaderPessoas(listPessoas);
+
+            listPessoas.Sort((a, b) => a.Nome.CompareTo(b.Nome));
+
+            foreach (Pessoa p in listPessoas)
+            {
+                string[] items = { p.Nome, p.Email };
+
+                listView_pessoas.Items.Add(new ListViewItem(items));
+            }
+        }
+
+        private void Form_Principal_Load(object sender, EventArgs e)
+        {
+            LoadListView();
+        }
+
+        private void excluirPessoaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel_ExcluirPessoa.Visible = true;
+            textBox_ExcluirPessoa.Focus();
+        }
+
+        private void button_Sair_Click(object sender, EventArgs e)
+        {
+            panel_ExcluirPessoa.Visible = false;
+        }
+
+        private void textBox_ExcluirPessoa_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\r')
+            {
+                Persistencia.CSVRemovePessoa(textBox_ExcluirPessoa.Text);
+                LoadListView();
+            }
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                panel_ExcluirPessoa.Visible = false;
+            }
+        }
+
+        private void button_Excluir_Click(object sender, EventArgs e)
+        {
+            Persistencia.CSVRemovePessoa(textBox_ExcluirPessoa.Text);
+            LoadListView();
         }
     }
 }
