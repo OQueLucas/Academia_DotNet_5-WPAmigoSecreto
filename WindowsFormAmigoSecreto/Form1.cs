@@ -5,6 +5,7 @@ namespace WindowsFormAmigoSecreto
     public partial class Form_Principal : Form
     {
         List<Pessoa> listPessoas = new();
+        List<AmigoSecreto> listAmigosSecretos = new();
         public Form_Principal()
         {
             InitializeComponent();
@@ -141,9 +142,38 @@ namespace WindowsFormAmigoSecreto
 
         public void ExcluirPessoa()
         {
-            Persistencia.CSVRemovePessoa(listPessoas, textBox_ExcluirPessoa.Text);
-            textBox_ExcluirPessoa.Text = "";
-            LoadListView();
+            try
+            {
+                Persistencia.CSVRemovePessoa(listPessoas, textBox_ExcluirPessoa.Text);
+                textBox_ExcluirPessoa.Text = "";
+                LoadListView();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, e.GetType().Name);
+            }
+        }
+
+        private void exibirAmigoSecretoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listView_AmigoSecreto.Items.Clear();
+            panel_AmigoSecreto.Visible = true;
+
+            Persistencia.CSVReaderAmigo(listAmigosSecretos);
+
+            listAmigosSecretos.Sort((a, b) => a.Nome.CompareTo(b.Nome));
+
+            foreach (AmigoSecreto amigoSecreto in listAmigosSecretos)
+            {
+                string[] items = { amigoSecreto.Nome, amigoSecreto.Email, amigoSecreto.NomeAmigo, amigoSecreto.EmailAmigo };
+
+                listView_AmigoSecreto.Items.Add(new ListViewItem(items));
+            }
+        }
+
+        private void button_SairAmigoSecreto_Click(object sender, EventArgs e)
+        {
+            panel_AmigoSecreto.Visible = false;
         }
     }
 }

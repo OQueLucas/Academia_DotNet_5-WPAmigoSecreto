@@ -38,13 +38,22 @@
             menuStrip_Principal = new MenuStrip();
             GerarAmigoSecretoToolStripMenuItem = new ToolStripMenuItem();
             excluirPessoaToolStripMenuItem = new ToolStripMenuItem();
+            exibirAmigoSecretoToolStripMenuItem = new ToolStripMenuItem();
             panel_ExcluirPessoa = new Panel();
             button_Sair = new Button();
             button_Excluir = new Button();
             textBox_ExcluirPessoa = new TextBox();
             label1 = new Label();
+            panel_AmigoSecreto = new Panel();
+            listView_AmigoSecreto = new ListView();
+            columnHeader_Nome = new ColumnHeader();
+            columnHeader_Email = new ColumnHeader();
+            columnHeader_NomeAmigo = new ColumnHeader();
+            columnHeader_EmailAmigo = new ColumnHeader();
+            button_SairAmigoSecreto = new Button();
             menuStrip_Principal.SuspendLayout();
             panel_ExcluirPessoa.SuspendLayout();
+            panel_AmigoSecreto.SuspendLayout();
             SuspendLayout();
             // 
             // label_NomeCompleto
@@ -107,7 +116,7 @@
             // 
             // menuStrip_Principal
             // 
-            menuStrip_Principal.Items.AddRange(new ToolStripItem[] { GerarAmigoSecretoToolStripMenuItem, excluirPessoaToolStripMenuItem });
+            menuStrip_Principal.Items.AddRange(new ToolStripItem[] { GerarAmigoSecretoToolStripMenuItem, excluirPessoaToolStripMenuItem, exibirAmigoSecretoToolStripMenuItem });
             menuStrip_Principal.Location = new Point(0, 0);
             menuStrip_Principal.Name = "menuStrip_Principal";
             menuStrip_Principal.Size = new Size(800, 24);
@@ -127,6 +136,13 @@
             excluirPessoaToolStripMenuItem.Size = new Size(93, 20);
             excluirPessoaToolStripMenuItem.Text = "Excluir Pessoa";
             excluirPessoaToolStripMenuItem.Click += excluirPessoaToolStripMenuItem_Click;
+            // 
+            // exibirAmigoSecretoToolStripMenuItem
+            // 
+            exibirAmigoSecretoToolStripMenuItem.Name = "exibirAmigoSecretoToolStripMenuItem";
+            exibirAmigoSecretoToolStripMenuItem.Size = new Size(129, 20);
+            exibirAmigoSecretoToolStripMenuItem.Text = "Exibir Amigo Secreto";
+            exibirAmigoSecretoToolStripMenuItem.Click += exibirAmigoSecretoToolStripMenuItem_Click;
             // 
             // panel_ExcluirPessoa
             // 
@@ -177,11 +193,62 @@
             label1.TabIndex = 0;
             label1.Text = "Digite o nome ou email de quem deseja excluir:";
             // 
+            // panel_AmigoSecreto
+            // 
+            panel_AmigoSecreto.Controls.Add(button_SairAmigoSecreto);
+            panel_AmigoSecreto.Controls.Add(listView_AmigoSecreto);
+            panel_AmigoSecreto.Location = new Point(153, 45);
+            panel_AmigoSecreto.Name = "panel_AmigoSecreto";
+            panel_AmigoSecreto.Size = new Size(604, 352);
+            panel_AmigoSecreto.TabIndex = 10;
+            panel_AmigoSecreto.Visible = false;
+            // 
+            // listView_AmigoSecreto
+            // 
+            listView_AmigoSecreto.Columns.AddRange(new ColumnHeader[] { columnHeader_Nome, columnHeader_Email, columnHeader_NomeAmigo, columnHeader_EmailAmigo });
+            listView_AmigoSecreto.Location = new Point(3, 3);
+            listView_AmigoSecreto.Name = "listView_AmigoSecreto";
+            listView_AmigoSecreto.Size = new Size(598, 290);
+            listView_AmigoSecreto.TabIndex = 0;
+            listView_AmigoSecreto.UseCompatibleStateImageBehavior = false;
+            listView_AmigoSecreto.View = View.Details;
+            // 
+            // columnHeader_Nome
+            // 
+            columnHeader_Nome.Text = "Nome";
+            columnHeader_Nome.Width = 110;
+            // 
+            // columnHeader_Email
+            // 
+            columnHeader_Email.Text = "Email";
+            columnHeader_Email.Width = 140;
+            // 
+            // columnHeader_NomeAmigo
+            // 
+            columnHeader_NomeAmigo.Text = "Nome Amigo";
+            columnHeader_NomeAmigo.Width = 110;
+            // 
+            // columnHeader_EmailAmigo
+            // 
+            columnHeader_EmailAmigo.Text = "Email Amigo";
+            columnHeader_EmailAmigo.Width = 140;
+            // 
+            // button_SairAmigoSecreto
+            // 
+            button_SairAmigoSecreto.Location = new Point(506, 311);
+            button_SairAmigoSecreto.Name = "button_SairAmigoSecreto";
+            button_SairAmigoSecreto.Size = new Size(75, 23);
+            button_SairAmigoSecreto.TabIndex = 1;
+            button_SairAmigoSecreto.Text = "Sair";
+            button_SairAmigoSecreto.UseVisualStyleBackColor = true;
+            button_SairAmigoSecreto.Click += button_SairAmigoSecreto_Click;
+            // 
             // Form_Principal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(panel_AmigoSecreto);
             Controls.Add(panel_ExcluirPessoa);
             Controls.Add(menuStrip_Principal);
             Controls.Add(button_cadastrar);
@@ -197,6 +264,7 @@
             menuStrip_Principal.PerformLayout();
             panel_ExcluirPessoa.ResumeLayout(false);
             panel_ExcluirPessoa.PerformLayout();
+            panel_AmigoSecreto.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -218,5 +286,13 @@
         private Label label1;
         private ToolStripMenuItem excluirPessoaToolStripMenuItem;
         private Button button_Sair;
+        private ToolStripMenuItem exibirAmigoSecretoToolStripMenuItem;
+        private Panel panel_AmigoSecreto;
+        private ListView listView_AmigoSecreto;
+        private ColumnHeader columnHeader_Nome;
+        private ColumnHeader columnHeader_Email;
+        private ColumnHeader columnHeader_NomeAmigo;
+        private ColumnHeader columnHeader_EmailAmigo;
+        private Button button_SairAmigoSecreto;
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System.Text;
-using System;
-using System.IO;
 
 namespace WindowsFormAmigoSecreto
 {
@@ -18,7 +16,7 @@ namespace WindowsFormAmigoSecreto
 
                 while (!streamReader.EndOfStream)
                 {
-                    var line = streamReader.ReadLine().Split(";");
+                    string[] line = streamReader.ReadLine().Split(";");
                     Pessoa pessoa = new(line[0], line[1]);
                     if (!pessoas.Contains(pessoa))
                     {
@@ -28,7 +26,7 @@ namespace WindowsFormAmigoSecreto
             }
             catch (Exception e)
             {
-                MessageBox.Show("Não foi possível abrir o arquivo. " + e.Message, e.GetType().Name);
+                MessageBox.Show("Não foi possível abrir o arquivo.\n" + e.Message, e.GetType().Name);
             }
             finally
             {
@@ -75,6 +73,35 @@ namespace WindowsFormAmigoSecreto
             }
         }
 
+        public static void CSVReaderAmigo(List<AmigoSecreto> amigosSecretos)
+        {
+            StreamReader? streamReader = null;
+            try
+            {
+                streamReader = new(pathAmigoSecreto, Encoding.UTF8);
+
+                while (!streamReader.EndOfStream)
+                {
+                    string[] line = streamReader.ReadLine().Split(";");
+                    Pessoa pessoa = new(line[0], line[1]);
+                    Pessoa amigo = new(line[2], line[3]);
+                    AmigoSecreto amigoSecreto = new(pessoa, amigo);
+                    if (!amigosSecretos.Contains(amigoSecreto))
+                    {
+                        amigosSecretos.Add(amigoSecreto);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Não foi possível abrir o arquivo.\n" + e.Message, e.GetType().Name);
+            }
+            finally
+            {
+                streamReader?.Close();
+            }
+        }
+
         public static void CSVWriterAmigo(List<AmigoSecreto> listAmigosSecretos)
         {
             StreamWriter? streamWriter = null;
@@ -96,43 +123,41 @@ namespace WindowsFormAmigoSecreto
             }
         }
 
+        public static Pessoa CSVFindPessoa(List<Pessoa> listPessoas, string input)
+        {
+            Pessoa? pessoa;
+
+            if (listPessoas.Count == 0)
+            {
+                throw new Exception("Não tem ninguém na lista!");
+            }
+
+            if (Util.EmailIsValid(input))
+            {
+                pessoa = listPessoas.FirstOrDefault(p => p.Email.ToUpper() == input.ToUpper());
+            }
+            else
+            {
+                pessoa = listPessoas.FirstOrDefault(p => p.Nome.ToUpper() == input.ToUpper());
+            }
+
+            if (pessoa == null)
+            {
+                throw new Exception("Pessoa não encontrada!");
+            }
+
+            return pessoa;
+        }
+
         public static void CSVRemovePessoa(List<Pessoa> listPessoas, string input)
         {
-            try
-            {
-                Pessoa pessoa;
-                CSVReaderPessoas(listPessoas);
+            Pessoa pessoa = CSVFindPessoa(listPessoas, input);
 
-                if (listPessoas.Count == 0)
-                {
-                    MessageBox.Show("Não tem ninguém na lista!");
-                    return;
-                }
+            listPessoas.Remove(pessoa);
 
-                if (Util.EmailIsValid(input))
-                {
-                    pessoa = listPessoas.FirstOrDefault(p => p.Email == input);
-                }
-                else
-                {
-                    pessoa = listPessoas.FirstOrDefault(p => p.Nome == input);
-                }
+            CSVWriterPessoa(listPessoas);
 
-                if (pessoa == null)
-                {
-                    MessageBox.Show($"Pessoa não encontrada!");
-                    return;
-                }
-
-                MessageBox.Show($"{pessoa.Nome} foi excluído com sucesso!");
-                listPessoas.Remove(pessoa);
-
-                CSVWriterPessoa(listPessoas);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Não é possível excluir a pessoa. " + e.Message, e.GetType().Name);
-            }
+            MessageBox.Show($"{pessoa.Nome} foi excluído(a) com sucesso!");
         }
     }
 }

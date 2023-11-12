@@ -26,5 +26,19 @@
         {
             return Nome + ";" + Email + ";" + NomeAmigo + ";" + EmailAmigo;
         }
+
+        public override bool Equals(object? obj)
+        {
+            AmigoSecreto PessoaObj = obj as AmigoSecreto;
+
+            if (obj == null) return false;
+
+            return Email.ToUpper().Equals(PessoaObj.Email.ToUpper());
+        }
+
+        public override int GetHashCode()
+        {
+            return Email.GetHashCode();
+        }
     }
 }
