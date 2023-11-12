@@ -154,26 +154,10 @@ namespace WindowsFormAmigoSecreto
             }
         }
 
-        private void exibirAmigoSecretoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void formAmigoSecretoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            listView_AmigoSecreto.Items.Clear();
-            panel_AmigoSecreto.Visible = true;
-
-            Persistencia.CSVReaderAmigo(listAmigosSecretos);
-
-            listAmigosSecretos.Sort((a, b) => a.Nome.CompareTo(b.Nome));
-
-            foreach (AmigoSecreto amigoSecreto in listAmigosSecretos)
-            {
-                string[] items = { amigoSecreto.Nome, amigoSecreto.Email, amigoSecreto.NomeAmigo, amigoSecreto.EmailAmigo };
-
-                listView_AmigoSecreto.Items.Add(new ListViewItem(items));
-            }
-        }
-
-        private void button_SairAmigoSecreto_Click(object sender, EventArgs e)
-        {
-            panel_AmigoSecreto.Visible = false;
+            FormAmigoSecreto formAmigoSecreto = new();
+            formAmigoSecreto.Show();
         }
     }
 }
