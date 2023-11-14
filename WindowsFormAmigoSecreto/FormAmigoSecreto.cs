@@ -10,6 +10,7 @@
             InitializeComponent();
 
             _amigoSecreto = new(listAmigosSecretos);
+            _amigoSecreto.ListView_amigosSecretos = listView_AmigoSecreto;
 
             this.Load += delegate { _amigoSecreto.Load(); };
         }

@@ -73,7 +73,6 @@
             Controls.Add(listView_AmigoSecreto);
             Name = "FormAmigoSecreto";
             Text = "FormAmigoSecreto";
-            Load += FormAmigoSecreto_Load;
             ResumeLayout(false);
         }
 
