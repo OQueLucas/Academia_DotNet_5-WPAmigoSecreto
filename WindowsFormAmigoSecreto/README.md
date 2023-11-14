@@ -2,6 +2,8 @@
 
 Aplicação desenvolvida em `C# Windows Form` com o intuito de gerar pares pros amigos secreto.
 
+![Video da versão Alpha no youtube](https://youtu.be/Ri8pkEohAXI)
+
 ## 📏 Regras de negócio
 
 - Utilizei como base a ideia do MVVM para criação e organização de pastas;
