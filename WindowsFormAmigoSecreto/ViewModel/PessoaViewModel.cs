@@ -1,4 +1,6 @@
-﻿namespace WindowsFormAmigoSecreto
+﻿using WindowsFormAmigoSecreto.Model;
+
+namespace WindowsFormAmigoSecreto.ViewModel
 {
     internal class PessoaViewModel
     {
@@ -6,6 +8,7 @@
 
         public ListView ListView_pessoas { get; set; }
         public TextBox TextBox_NomeCompleto { get; set; }
+        public TextBox TextBox_Email { get; set; }
         public TextBox TextBox_ExcluirPessoa { get; set; }
 
         public PessoaViewModel(List<Pessoa> listPessoas)
@@ -31,6 +34,7 @@
 
         public void Cadastrar()
         {
+            Pessoa p;
             string[] vetor = TextBox_NomeCompleto.Text.Split(" ");
 
             if (vetor.Length < 2)
@@ -40,8 +44,23 @@
             }
 
             string nome = TextBox_NomeCompleto.Text;
+            string email = TextBox_Email.Text;
 
-            Pessoa p = new(nome);
+            if (email == "")
+            {
+                p = new(nome);
+            }
+            else
+            {
+                if (!Util.EmailIsValid(email))
+                {
+                    MessageBox.Show("Email não é válido");
+                    return;
+                }
+
+                p = new(nome, email);
+            }
+
 
             if (ListPessoas.Contains(p))
             {
@@ -55,7 +74,7 @@
             Persistencia.CSVWriterPessoa(p);
 
             Load();
-            TextBox_NomeCompleto.Text = "";
+            LimparCampos();
         }
 
         public void ExcluirPessoa()
@@ -63,13 +82,19 @@
             try
             {
                 Persistencia.CSVRemovePessoa(ListPessoas, TextBox_ExcluirPessoa.Text);
-                TextBox_ExcluirPessoa.Text = "";
                 Load();
+                TextBox_ExcluirPessoa.Text = "";
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, e.GetType().Name);
             }
+        }
+
+        public void LimparCampos()
+        {
+            TextBox_NomeCompleto.Text = "";
+            TextBox_Email.Text = "";
         }
     }
 }

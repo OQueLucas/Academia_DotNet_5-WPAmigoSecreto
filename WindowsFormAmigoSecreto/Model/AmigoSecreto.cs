@@ -1,4 +1,4 @@
-﻿namespace WindowsFormAmigoSecreto
+﻿namespace WindowsFormAmigoSecreto.Model
 {
     public class AmigoSecreto
     {

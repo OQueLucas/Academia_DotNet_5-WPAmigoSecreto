@@ -1,4 +1,6 @@
-﻿namespace WindowsFormAmigoSecreto
+﻿using WindowsFormAmigoSecreto.Model;
+
+namespace WindowsFormAmigoSecreto.ViewModel
 {
     internal class AmigoSecretoViewModel
     {

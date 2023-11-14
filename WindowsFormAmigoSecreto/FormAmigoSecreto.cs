@@ -1,9 +1,12 @@
-﻿namespace WindowsFormAmigoSecreto
+﻿using WindowsFormAmigoSecreto.Model;
+using WindowsFormAmigoSecreto.ViewModel;
+
+namespace WindowsFormAmigoSecreto
 {
     public partial class FormAmigoSecreto : Form
     {
-        private AmigoSecretoViewModel _amigoSecreto;
-        List<AmigoSecreto> listAmigosSecretos = new();
+        private ViewModel.AmigoSecretoViewModel _amigoSecreto;
+        List<Model.AmigoSecreto> listAmigosSecretos = new();
 
         public FormAmigoSecreto()
         {

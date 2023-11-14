@@ -1,3 +1,6 @@
+using WindowsFormAmigoSecreto.Model;
+using WindowsFormAmigoSecreto.ViewModel;
+
 namespace WindowsFormAmigoSecreto
 {
     public partial class Form_Principal : Form
@@ -13,12 +16,14 @@ namespace WindowsFormAmigoSecreto
             {
                 ListView_pessoas = listView_pessoas,
                 TextBox_NomeCompleto = textBox_NomeCompleto,
-                TextBox_ExcluirPessoa = textBox_ExcluirPessoa
+                TextBox_Email = textBox_Email,
+                TextBox_ExcluirPessoa = textBox_ExcluirPessoa,
             };
 
             this.Load += delegate { _pessoa.Load(); };
             button_cadastrar.Click += delegate { _pessoa.Cadastrar(); };
             button_Excluir.Click += delegate { _pessoa.ExcluirPessoa(); };
+            button_limpar.Click += delegate { _pessoa.LimparCampos(); };
 
             _amigoSecreto = new(listPessoas);
 
@@ -31,6 +36,15 @@ namespace WindowsFormAmigoSecreto
             {
                 _pessoa.Cadastrar();
             }
+        }
+
+        private void textBox_Email_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\r')
+            {
+                _pessoa.Cadastrar();
+            }
+
         }
 
         private void excluirPessoaToolStripMenuItem_Click(object sender, EventArgs e)
