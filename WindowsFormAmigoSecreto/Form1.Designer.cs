@@ -104,7 +104,6 @@
             button_cadastrar.TabIndex = 2;
             button_cadastrar.Text = "Cadastrar";
             button_cadastrar.UseVisualStyleBackColor = true;
-            button_cadastrar.Click += Button_cadastrar_Click;
             // 
             // menuStrip_Principal
             // 
@@ -120,7 +119,6 @@
             GerarAmigoSecretoToolStripMenuItem.Name = "GerarAmigoSecretoToolStripMenuItem";
             GerarAmigoSecretoToolStripMenuItem.Size = new Size(128, 20);
             GerarAmigoSecretoToolStripMenuItem.Text = "Gerar Amigo Secreto";
-            GerarAmigoSecretoToolStripMenuItem.Click += GerarAmigoSecretoToolStripMenuItem_Click;
             // 
             // excluirPessoaToolStripMenuItem
             // 
@@ -166,7 +164,6 @@
             button_Excluir.TabIndex = 2;
             button_Excluir.Text = "Excluir";
             button_Excluir.UseVisualStyleBackColor = true;
-            button_Excluir.Click += button_Excluir_Click;
             // 
             // textBox_ExcluirPessoa
             // 
@@ -200,7 +197,6 @@
             MainMenuStrip = menuStrip_Principal;
             Name = "Form_Principal";
             Text = "Amigo Secreto";
-            Load += Form_Principal_Load;
             menuStrip_Principal.ResumeLayout(false);
             menuStrip_Principal.PerformLayout();
             panel_ExcluirPessoa.ResumeLayout(false);

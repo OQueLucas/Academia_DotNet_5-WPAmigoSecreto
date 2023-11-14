@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormAmigoSecreto
 {
-    internal class AmigoSecreto
+    public class AmigoSecreto
     {
         private string _nome;
         private string _email;
