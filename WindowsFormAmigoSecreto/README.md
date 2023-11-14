@@ -12,6 +12,12 @@ Aplicação desenvolvida em `C# Windows Form` com o intuito de gerar pares pros 
 - A classe `Persistencia` é essencial para a conexão, leitura e escrita com os CSVs, usei uma ideia semelhante a de como capturar dados de banco de dados pra facilitar a leitura do mesmo.
 - A classe `Utils` tem métodos auxiliares, para validação de email e geração do mesmo, para poder ser acessado em momentos necessários do codigo.
 
+## 📲 Recursos implementados
+- Foi adicionado os tabIndex para facilitar o uso do sistema pro usuário com a tecla tab.
+- Adicionado leitura de tecla enter para enviar dados e esc para sair da tela de remoção de usuário.
+- Configurado geração de email automática (com domínio UFN.com.br) caso usuário não tenha especificado o email do mesmo.
+- Implementado menu para acesso de remoção de pessoa, gerar lista de amigos secretos e acesso a lista detalhada.
+
 ## 🔧 Recursos Utilizados
 
 - ``.NET 6``
