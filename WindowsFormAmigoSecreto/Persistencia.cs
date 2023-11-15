@@ -35,24 +35,6 @@ namespace WindowsFormAmigoSecreto
             }
         }
 
-        public static void CSVWriterPessoa(Pessoa pessoa)
-        {
-            StreamWriter? streamWriter = null;
-            try
-            {
-                streamWriter = File.Exists(pathPessoas) ? File.AppendText(pathPessoas) : File.CreateText(pathPessoas);
-                streamWriter.WriteLine(pessoa);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, e.GetType().Name);
-            }
-            finally
-            {
-                streamWriter?.Close();
-            }
-        }
-
         public static void CSVWriterPessoa(List<Pessoa> listPessoas)
         {
             StreamWriter? streamWriter = null;
@@ -124,7 +106,7 @@ namespace WindowsFormAmigoSecreto
             }
         }
 
-        public static Pessoa CSVFindPessoa(List<Pessoa> listPessoas, string input)
+        public static Pessoa FindPessoa(List<Pessoa> listPessoas, string input)
         {
             Pessoa? pessoa;
 
@@ -144,21 +126,25 @@ namespace WindowsFormAmigoSecreto
 
             if (pessoa == null)
             {
-                throw new Exception("Pessoa não encontrada!");
+                return null;
             }
 
             return pessoa;
         }
 
-        public static void CSVRemovePessoa(List<Pessoa> listPessoas, string input)
+        public static Pessoa RemovePessoa(List<Pessoa> listPessoas, string input, out bool excluido)
         {
-            Pessoa pessoa = CSVFindPessoa(listPessoas, input);
+            excluido = false;
+            Pessoa pessoa = FindPessoa(listPessoas, input);
+
+            if (pessoa == null)
+            {
+                return null;
+            }
 
             listPessoas.Remove(pessoa);
-
-            CSVWriterPessoa(listPessoas);
-
-            MessageBox.Show($"{pessoa.Nome} foi excluído(a) com sucesso!");
+            excluido = true;
+            return pessoa;
         }
     }
 }

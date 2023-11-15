@@ -4,29 +4,19 @@ namespace WindowsFormAmigoSecreto.ViewModel
 {
     internal class AmigoSecretoViewModel
     {
-        public List<Pessoa> ListPessoas;
-        public List<AmigoSecreto> ListAmigosSecretos;
         public ListView ListView_amigosSecretos { get; set; }
 
-        public AmigoSecretoViewModel(List<Pessoa> listPessoas)
-        {
-            ListPessoas = listPessoas;
-        }
+        public AmigoSecretoViewModel(){}
 
-        public AmigoSecretoViewModel(List<AmigoSecreto> listAmigosSecretos)
-        {
-            ListAmigosSecretos = listAmigosSecretos;
-        }
-
-        public void Load()
+        public void Load(List<AmigoSecreto> listAmigosSecretos)
         {
             ListView_amigosSecretos.Items.Clear();
 
-            Persistencia.CSVReaderAmigo(ListAmigosSecretos);
+            Persistencia.CSVReaderAmigo(listAmigosSecretos);
 
-            ListAmigosSecretos.Sort((a, b) => a.Nome.CompareTo(b.Nome));
+            listAmigosSecretos.Sort((a, b) => a.Nome.CompareTo(b.Nome));
 
-            foreach (AmigoSecreto amigoSecreto in ListAmigosSecretos)
+            foreach (AmigoSecreto amigoSecreto in listAmigosSecretos)
             {
                 string[] items = { amigoSecreto.Nome, amigoSecreto.Email, amigoSecreto.NomeAmigo, amigoSecreto.EmailAmigo };
 
@@ -34,19 +24,22 @@ namespace WindowsFormAmigoSecreto.ViewModel
             }
         }
 
-        public void GerarAmigoSecreto()
+        public void GerarAmigoSecreto(List<Pessoa> listPessoas)
         {
             try
             {
-                Persistencia.CSVReaderPessoas(ListPessoas);
+                if (listPessoas.Count == 0)
+                {
+                    throw new Exception("Não há ninguém na lista, Carregue uma lista existente ou Cadastre novas pessoas!");
+                }
 
                 Random rng = new();
 
-                List<Pessoa> listAmigos = ListPessoas.ToList();
+                List<Pessoa> listAmigos = listPessoas.ToList();
 
                 List<AmigoSecreto> listAmigosSecretos = new();
 
-                foreach (Pessoa pessoa in ListPessoas)
+                foreach (Pessoa pessoa in listPessoas)
                 {
                     int random = rng.Next(0, listAmigos.Count);
                     Pessoa amigo = listAmigos.ElementAt(random);

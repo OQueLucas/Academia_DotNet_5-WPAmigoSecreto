@@ -20,8 +20,6 @@ namespace WindowsFormAmigoSecreto.ViewModel
         {
             ListView_pessoas.Items.Clear();
 
-            Persistencia.CSVReaderPessoas(ListPessoas);
-
             ListPessoas.Sort((a, b) => a.Nome.CompareTo(b.Nome));
 
             foreach (Pessoa p in ListPessoas)
@@ -61,7 +59,6 @@ namespace WindowsFormAmigoSecreto.ViewModel
                 p = new(nome, email);
             }
 
-
             if (ListPessoas.Contains(p))
             {
                 MessageBox.Show("Essa pessoa já foi cadastrada!", "Já cadastrado");
@@ -71,19 +68,52 @@ namespace WindowsFormAmigoSecreto.ViewModel
             ListPessoas.Add(p);
             ListPessoas.Sort((a, b) => a.Nome.CompareTo(b.Nome));
 
-            Persistencia.CSVWriterPessoa(p);
-
             Load();
             LimparCampos();
+        }
+
+        public void SalvarLista()
+        {
+            Persistencia.CSVWriterPessoa(ListPessoas);
+        }
+
+        public void CarregarLista()
+        {
+            Persistencia.CSVReaderPessoas(ListPessoas);
+            Load();
+        }
+
+        public void LimparLista()
+        {
+            ListPessoas = new List<Pessoa>();
+            Load();
         }
 
         public void ExcluirPessoa()
         {
             try
             {
-                Persistencia.CSVRemovePessoa(ListPessoas, TextBox_ExcluirPessoa.Text);
+                bool removeu;
+                Pessoa pessoa;
+
+                pessoa = Persistencia.RemovePessoa(ListPessoas, TextBox_Email.Text, out removeu);
+
+                if (removeu == false)
+                {
+                    pessoa = Persistencia.RemovePessoa(ListPessoas, TextBox_NomeCompleto.Text, out removeu);
+                }
+
+                if (removeu == true)
+                {
+                    MessageBox.Show($"{pessoa.Nome} foi excluído(a) com sucesso!");
+                }
+                else
+                {
+                    MessageBox.Show("Não foi possível excluir ninguém!");
+                }
+
                 Load();
-                TextBox_ExcluirPessoa.Text = "";
+                LimparCampos();
             }
             catch (Exception e)
             {
@@ -95,6 +125,7 @@ namespace WindowsFormAmigoSecreto.ViewModel
         {
             TextBox_NomeCompleto.Text = "";
             TextBox_Email.Text = "";
+            TextBox_NomeCompleto.Focus();
         }
     }
 }
