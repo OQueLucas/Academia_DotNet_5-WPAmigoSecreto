@@ -35,6 +35,8 @@ namespace WindowsFormAmigoSecreto
             button_GerarPares.Click += delegate { _amigoSecreto.GerarAmigoSecreto(listPessoas); };
             button_FormAmigoSecreto.Click += delegate
             {
+                MessageBox.Show("Deseja realmente abrir este arquivo?");
+                MessageBox.Show("Você pode estragar a brincadeira");
                 FormAmigoSecreto formAmigoSecreto = new();
                 formAmigoSecreto.Show();
             };
@@ -54,16 +56,6 @@ namespace WindowsFormAmigoSecreto
             {
                 _pessoa.Cadastrar();
             }
-
-        }
-
-        private void formAmigoSecretoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
 
         }
     }

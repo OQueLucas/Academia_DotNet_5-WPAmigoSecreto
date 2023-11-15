@@ -1,4 +1,5 @@
-﻿using WindowsFormAmigoSecreto.Model;
+﻿using Microsoft.VisualBasic;
+using WindowsFormAmigoSecreto.Model;
 
 namespace WindowsFormAmigoSecreto.ViewModel
 {
@@ -74,11 +75,13 @@ namespace WindowsFormAmigoSecreto.ViewModel
 
         public void SalvarLista()
         {
-            Persistencia.CSVWriterPessoa(ListPessoas);
+            string path = Interaction.InputBox("Onde gostaria de salvar o arquivo pessoas.csv?", "Digite apenas o caminho!");
+            Persistencia.CSVWriterPessoa(ListPessoas, path);
         }
 
         public void CarregarLista()
         {
+            MessageBox.Show("De onde gostaria de carregar? ");
             Persistencia.CSVReaderPessoas(ListPessoas);
             Load();
         }
@@ -93,24 +96,28 @@ namespace WindowsFormAmigoSecreto.ViewModel
         {
             try
             {
-                bool removeu;
+                if (ListPessoas.Count == 0)
+                {
+                    throw new Exception("Lista de pessoas vazias");
+                }
+
+                if (TextBox_Email.Text == "" && TextBox_NomeCompleto.Text == "")
+                {
+                    TextBox_NomeCompleto.Focus();
+                    throw new Exception("Insira um email ou nome para ser excluído!");
+                }
+
+                bool removeu = false;
                 Pessoa pessoa;
 
-                pessoa = Persistencia.RemovePessoa(ListPessoas, TextBox_Email.Text, out removeu);
+                pessoa = Persistencia.FindPessoa(ListPessoas, TextBox_Email.Text);
 
-                if (removeu == false)
+                if (pessoa == null)
                 {
-                    pessoa = Persistencia.RemovePessoa(ListPessoas, TextBox_NomeCompleto.Text, out removeu);
+                    pessoa = Persistencia.FindPessoa(ListPessoas, TextBox_NomeCompleto.Text);
                 }
 
-                if (removeu == true)
-                {
-                    MessageBox.Show($"{pessoa.Nome} foi excluído(a) com sucesso!");
-                }
-                else
-                {
-                    MessageBox.Show("Não foi possível excluir ninguém!");
-                }
+                removeu = Persistencia.RemovePessoa(ListPessoas, pessoa);
 
                 Load();
                 LimparCampos();

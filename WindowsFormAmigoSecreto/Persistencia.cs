@@ -35,16 +35,43 @@ namespace WindowsFormAmigoSecreto
             }
         }
 
-        public static void CSVWriterPessoa(List<Pessoa> listPessoas)
+        public static void CSVWriterPessoa(List<Pessoa> listPessoas, string newPath)
         {
             StreamWriter? streamWriter = null;
+
+            if (newPath == "")
+            {
+                newPath = pathPessoas;
+            }
+            else
+            {
+                newPath = Path.Combine(newPath + @"\pessoas.csv");
+            }
+
+            //List<Pessoa> pessoas = new();
+            //DialogResult result = DialogResult.Yes;
+
+
+            //CSVReaderPessoas(pessoas); 
+
+            //if (pessoas.Count > 0)
+            //{
+            //    result = MessageBox.Show($"Lista já populada, deseja refazer?", "", MessageBoxButtons.YesNo);
+            //}
+
+            //if (result == DialogResult.No)
+            //{
+            //    return;
+            //}
+
             try
             {
-                streamWriter = File.CreateText(pathPessoas);
+                streamWriter = File.CreateText(newPath);
                 foreach (Pessoa p in listPessoas)
                 {
                     streamWriter.WriteLine(p);
                 }
+                MessageBox.Show("Novo arquivo gerado com sucesso!");
             }
             catch (Exception e)
             {
@@ -75,9 +102,9 @@ namespace WindowsFormAmigoSecreto
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                MessageBox.Show("Não foi possível abrir o arquivo.\n" + e.Message, e.GetType().Name);
+                throw new Exception("Não foi possível abrir o arquivo.");
             }
             finally
             {
@@ -96,9 +123,9 @@ namespace WindowsFormAmigoSecreto
                     streamWriter.WriteLine(amigoSecreto);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                MessageBox.Show(e.Message, e.GetType().Name);
+                throw new Exception();
             }
             finally
             {
@@ -112,7 +139,7 @@ namespace WindowsFormAmigoSecreto
 
             if (listPessoas.Count == 0)
             {
-                throw new Exception("Não tem ninguém na lista!");
+                throw new Exception("Lista vazia!");
             }
 
             if (Util.EmailIsValid(input))
@@ -132,19 +159,24 @@ namespace WindowsFormAmigoSecreto
             return pessoa;
         }
 
-        public static Pessoa RemovePessoa(List<Pessoa> listPessoas, string input, out bool excluido)
+        public static bool RemovePessoa(List<Pessoa> listPessoas, Pessoa pessoa)
         {
-            excluido = false;
-            Pessoa pessoa = FindPessoa(listPessoas, input);
-
             if (pessoa == null)
             {
-                return null;
+                throw new Exception("Não há ninguém com essa compatibilidade!");
+            }
+
+            DialogResult result = MessageBox.Show($"Tem certeza que deseja remover {pessoa.Nome}", "Excluir pessoa", MessageBoxButtons.YesNo);
+            if (result == DialogResult.No)
+            {
+                return false;
             }
 
             listPessoas.Remove(pessoa);
-            excluido = true;
-            return pessoa;
+            MessageBox.Show($"{pessoa.Nome} foi excluído(a) com sucesso!");
+            return true;
         }
     }
 }
+
+

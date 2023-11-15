@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Principal));
             label_NomeCompleto = new Label();
             textBox_NomeCompleto = new TextBox();
             label_Email = new Label();
@@ -52,7 +53,7 @@
             // label_NomeCompleto
             // 
             label_NomeCompleto.AutoSize = true;
-            label_NomeCompleto.Location = new Point(21, 26);
+            label_NomeCompleto.Location = new Point(21, 20);
             label_NomeCompleto.Name = "label_NomeCompleto";
             label_NomeCompleto.Size = new Size(99, 15);
             label_NomeCompleto.TabIndex = 0;
@@ -60,7 +61,7 @@
             // 
             // textBox_NomeCompleto
             // 
-            textBox_NomeCompleto.Location = new Point(126, 23);
+            textBox_NomeCompleto.Location = new Point(126, 17);
             textBox_NomeCompleto.Name = "textBox_NomeCompleto";
             textBox_NomeCompleto.Size = new Size(377, 23);
             textBox_NomeCompleto.TabIndex = 1;
@@ -69,7 +70,7 @@
             // label_Email
             // 
             label_Email.AutoSize = true;
-            label_Email.Location = new Point(79, 58);
+            label_Email.Location = new Point(81, 65);
             label_Email.Name = "label_Email";
             label_Email.RightToLeft = RightToLeft.No;
             label_Email.Size = new Size(39, 15);
@@ -78,7 +79,7 @@
             // 
             // textBox_Email
             // 
-            textBox_Email.Location = new Point(126, 55);
+            textBox_Email.Location = new Point(126, 60);
             textBox_Email.Name = "textBox_Email";
             textBox_Email.Size = new Size(377, 23);
             textBox_Email.TabIndex = 3;
@@ -115,7 +116,7 @@
             button_LimparCampos.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button_LimparCampos.ForeColor = SystemColors.ControlLightLight;
             button_LimparCampos.Image = Properties.Resources.broom_white;
-            button_LimparCampos.Location = new Point(509, 12);
+            button_LimparCampos.Location = new Point(519, 10);
             button_LimparCampos.Name = "button_LimparCampos";
             button_LimparCampos.Size = new Size(80, 80);
             button_LimparCampos.TabIndex = 5;
@@ -132,7 +133,7 @@
             button_CadastrarPessoa.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button_CadastrarPessoa.ForeColor = SystemColors.ControlLightLight;
             button_CadastrarPessoa.Image = Properties.Resources.user_plus_white;
-            button_CadastrarPessoa.Location = new Point(595, 12);
+            button_CadastrarPessoa.Location = new Point(605, 10);
             button_CadastrarPessoa.Name = "button_CadastrarPessoa";
             button_CadastrarPessoa.RightToLeft = RightToLeft.No;
             button_CadastrarPessoa.Size = new Size(80, 80);
@@ -150,7 +151,7 @@
             button_ExcluirPessoa.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button_ExcluirPessoa.ForeColor = SystemColors.ControlLightLight;
             button_ExcluirPessoa.Image = Properties.Resources.user_cross_white;
-            button_ExcluirPessoa.Location = new Point(681, 12);
+            button_ExcluirPessoa.Location = new Point(691, 10);
             button_ExcluirPessoa.Name = "button_ExcluirPessoa";
             button_ExcluirPessoa.Size = new Size(80, 80);
             button_ExcluirPessoa.TabIndex = 6;
@@ -212,6 +213,7 @@
             // 
             // button_GerarPares
             // 
+            button_GerarPares.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             button_GerarPares.BackColor = SystemColors.ControlLightLight;
             button_GerarPares.FlatAppearance.BorderColor = SystemColors.Control;
             button_GerarPares.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point);
@@ -229,6 +231,7 @@
             // 
             // button_FormAmigoSecreto
             // 
+            button_FormAmigoSecreto.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             button_FormAmigoSecreto.BackColor = SystemColors.ControlLightLight;
             button_FormAmigoSecreto.FlatAppearance.BorderColor = SystemColors.Control;
             button_FormAmigoSecreto.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point);
@@ -284,7 +287,10 @@
             Controls.Add(listView_pessoas);
             Controls.Add(panel_Bottom);
             Controls.Add(panel_Header);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "Form_Principal";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Amigo Secreto";
             panel_Header.ResumeLayout(false);
             panel_Header.PerformLayout();

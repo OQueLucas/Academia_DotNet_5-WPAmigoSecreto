@@ -33,6 +33,10 @@ namespace WindowsFormAmigoSecreto.ViewModel
                     throw new Exception("Não há ninguém na lista, Carregue uma lista existente ou Cadastre novas pessoas!");
                 }
 
+                MessageBox.Show("Onde gostaria de salvar?");
+
+                MessageBox.Show("Já possui pessoas nessa pasta, deseja sobrescrever?");
+
                 Random rng = new();
 
                 List<Pessoa> listAmigos = listPessoas.ToList();
