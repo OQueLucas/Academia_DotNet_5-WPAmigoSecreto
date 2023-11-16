@@ -3,7 +3,7 @@ Aplicação desenvolvida em `C# Windows Form` com o intuito de gerar pares pros 
 
 <div align="center">
 	
-[Video da versão Alpha no youtube](https://youtu.be/Ri8pkEohAXI)
+[Vídeo do projeto no youtube](https://youtu.be/zpuSAPt72dg)
 
 ![image](https://github.com/OQueLucas/Academia_DotNet_5-WPAmigoSecreto/assets/36959868/a0e6288a-00e5-467b-bd50-491a03f552f9)
 </div>
