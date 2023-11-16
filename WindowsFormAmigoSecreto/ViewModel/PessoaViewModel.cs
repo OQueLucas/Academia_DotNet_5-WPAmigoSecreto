@@ -78,6 +78,13 @@ namespace WindowsFormAmigoSecreto.ViewModel
 
         public void SalvarLista()
         {
+            
+            if (ListPessoas.Count == 0)
+            {
+                MessageBox.Show("Insira ou carregue pessoas na lista","Lista vazia!");
+                return;
+            }
+
             string path = @"F:\workspace";
 
             DialogResult result = FileLocation.ShowDialog(ref path, "Onde gostaria de salvar o arquivo pessoas.csv?", "Digite apenas o caminho!");
