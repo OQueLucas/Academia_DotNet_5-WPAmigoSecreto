@@ -39,7 +39,7 @@ Aplicação desenvolvida em `C# Windows Form` com o intuito de gerar pares pros 
 ## 🔻 Clonar Repositório
 
 ```bash
-git clone git@github.com:OQueLucas/SalesWebMvc.git
+git clone git@github.com:OQueLucas/Academia_DotNet_5-WPAmigoSecreto.git
 ```
 
 ## 👨🏻‍🦱 Author
