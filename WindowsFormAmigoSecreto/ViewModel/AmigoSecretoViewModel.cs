@@ -6,7 +6,7 @@ namespace WindowsFormAmigoSecreto.ViewModel
     {
         public ListView ListView_amigosSecretos { get; set; }
 
-        public AmigoSecretoViewModel(){}
+        public AmigoSecretoViewModel() { }
 
         public void Load(List<AmigoSecreto> listAmigosSecretos)
         {
@@ -26,16 +26,12 @@ namespace WindowsFormAmigoSecreto.ViewModel
 
         public void GerarAmigoSecreto(List<Pessoa> listPessoas)
         {
-            try
+                try
             {
                 if (listPessoas.Count == 0)
                 {
                     throw new Exception("Não há ninguém na lista, Carregue uma lista existente ou Cadastre novas pessoas!");
                 }
-
-                MessageBox.Show("Onde gostaria de salvar?");
-
-                MessageBox.Show("Já possui pessoas nessa pasta, deseja sobrescrever?");
 
                 Random rng = new();
 
@@ -67,6 +63,35 @@ namespace WindowsFormAmigoSecreto.ViewModel
             {
                 MessageBox.Show(ex.Message, ex.GetType().Name);
             }
+        }
+        public void EspiarAmigoSecreto()
+        {
+            DialogResult abrir = MessageBox.Show("Deseja realmente abrir este arquivo?", "", MessageBoxButtons.OKCancel);
+            if (abrir == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            DialogResult estragar = MessageBox.Show("Você pode estragar a brincadeira", "", MessageBoxButtons.OKCancel);
+            if (estragar == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            DialogResult desistir = MessageBox.Show("Não vai desistir?", "", MessageBoxButtons.OKCancel);
+            if (desistir == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            DialogResult insiste = MessageBox.Show("Você é insistente", "", MessageBoxButtons.OKCancel);
+            if (insiste == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            FormAmigoSecreto formAmigoSecreto = new();
+            formAmigoSecreto.ShowDialog();
         }
     }
 }

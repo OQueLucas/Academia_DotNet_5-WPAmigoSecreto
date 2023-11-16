@@ -14,6 +14,7 @@ namespace WindowsFormAmigoSecreto
             InitializeComponent();
 
             _amigoSecreto = new();
+            StartPosition = FormStartPosition.CenterParent;
             _amigoSecreto.ListView_amigosSecretos = listView_AmigoSecreto;
 
             this.Load += delegate { _amigoSecreto.Load(listAmigosSecretos); };

@@ -63,7 +63,7 @@
             // 
             textBox_NomeCompleto.Location = new Point(126, 17);
             textBox_NomeCompleto.Name = "textBox_NomeCompleto";
-            textBox_NomeCompleto.Size = new Size(377, 23);
+            textBox_NomeCompleto.Size = new Size(413, 23);
             textBox_NomeCompleto.TabIndex = 1;
             textBox_NomeCompleto.KeyPress += textBox_NomeCompleto_KeyPress;
             // 
@@ -81,7 +81,7 @@
             // 
             textBox_Email.Location = new Point(126, 60);
             textBox_Email.Name = "textBox_Email";
-            textBox_Email.Size = new Size(377, 23);
+            textBox_Email.Size = new Size(413, 23);
             textBox_Email.TabIndex = 3;
             textBox_Email.KeyPress += textBox_Email_KeyPress;
             // 
@@ -111,51 +111,48 @@
             // 
             // button_LimparCampos
             // 
-            button_LimparCampos.BackColor = SystemColors.ControlDarkDark;
+            button_LimparCampos.BackColor = Color.Transparent;
             button_LimparCampos.BackgroundImageLayout = ImageLayout.None;
             button_LimparCampos.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button_LimparCampos.ForeColor = SystemColors.ControlLightLight;
-            button_LimparCampos.Image = Properties.Resources.broom_white;
-            button_LimparCampos.Location = new Point(519, 10);
+            button_LimparCampos.Image = Properties.Resources.broom_gray;
+            button_LimparCampos.Location = new Point(561, 20);
             button_LimparCampos.Name = "button_LimparCampos";
-            button_LimparCampos.Size = new Size(80, 80);
+            button_LimparCampos.Size = new Size(55, 55);
             button_LimparCampos.TabIndex = 5;
-            button_LimparCampos.Text = "Limpar Campos";
             button_LimparCampos.TextAlign = ContentAlignment.BottomCenter;
             button_LimparCampos.TextImageRelation = TextImageRelation.ImageAboveText;
             button_LimparCampos.UseVisualStyleBackColor = false;
             // 
             // button_CadastrarPessoa
             // 
-            button_CadastrarPessoa.BackColor = Color.LimeGreen;
+            button_CadastrarPessoa.BackColor = Color.Transparent;
             button_CadastrarPessoa.BackgroundImageLayout = ImageLayout.None;
             button_CadastrarPessoa.FlatAppearance.BorderColor = SystemColors.Control;
             button_CadastrarPessoa.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button_CadastrarPessoa.ForeColor = SystemColors.ControlLightLight;
-            button_CadastrarPessoa.Image = Properties.Resources.user_plus_white;
-            button_CadastrarPessoa.Location = new Point(605, 10);
+            button_CadastrarPessoa.Image = Properties.Resources.user_add_green;
+            button_CadastrarPessoa.Location = new Point(634, 20);
             button_CadastrarPessoa.Name = "button_CadastrarPessoa";
             button_CadastrarPessoa.RightToLeft = RightToLeft.No;
-            button_CadastrarPessoa.Size = new Size(80, 80);
+            button_CadastrarPessoa.Size = new Size(55, 55);
             button_CadastrarPessoa.TabIndex = 4;
-            button_CadastrarPessoa.Text = "Cadastrar Pessoa";
             button_CadastrarPessoa.TextAlign = ContentAlignment.BottomCenter;
             button_CadastrarPessoa.TextImageRelation = TextImageRelation.ImageAboveText;
             button_CadastrarPessoa.UseVisualStyleBackColor = false;
             // 
             // button_ExcluirPessoa
             // 
-            button_ExcluirPessoa.BackColor = Color.Red;
+            button_ExcluirPessoa.BackColor = Color.Transparent;
             button_ExcluirPessoa.BackgroundImageLayout = ImageLayout.None;
             button_ExcluirPessoa.FlatAppearance.BorderColor = SystemColors.Control;
             button_ExcluirPessoa.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button_ExcluirPessoa.ForeColor = SystemColors.ControlLightLight;
-            button_ExcluirPessoa.Image = Properties.Resources.user_cross_white;
-            button_ExcluirPessoa.Location = new Point(691, 10);
+            button_ExcluirPessoa.ForeColor = Color.Red;
+            button_ExcluirPessoa.Image = Properties.Resources.user_remove_red;
+            button_ExcluirPessoa.Location = new Point(706, 20);
             button_ExcluirPessoa.Name = "button_ExcluirPessoa";
-            button_ExcluirPessoa.Size = new Size(80, 80);
+            button_ExcluirPessoa.Size = new Size(55, 55);
             button_ExcluirPessoa.TabIndex = 6;
-            button_ExcluirPessoa.Text = "Excluir Pessoa";
             button_ExcluirPessoa.TextAlign = ContentAlignment.BottomCenter;
             button_ExcluirPessoa.TextImageRelation = TextImageRelation.ImageAboveText;
             button_ExcluirPessoa.UseVisualStyleBackColor = false;

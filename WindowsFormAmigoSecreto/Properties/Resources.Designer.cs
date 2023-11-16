@@ -73,6 +73,16 @@ namespace WindowsFormAmigoSecreto.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap broom_gray {
+            get {
+                object obj = ResourceManager.GetObject("broom_gray", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap broom_white {
             get {
                 object obj = ResourceManager.GetObject("broom_white", resourceCulture);
@@ -113,6 +123,16 @@ namespace WindowsFormAmigoSecreto.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap user_add_green {
+            get {
+                object obj = ResourceManager.GetObject("user_add_green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap user_cross_white {
             get {
                 object obj = ResourceManager.GetObject("user_cross_white", resourceCulture);
@@ -146,6 +166,16 @@ namespace WindowsFormAmigoSecreto.Properties {
         internal static System.Drawing.Bitmap user_plus_white {
             get {
                 object obj = ResourceManager.GetObject("user_plus_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user_remove_red {
+            get {
+                object obj = ResourceManager.GetObject("user_remove_red", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

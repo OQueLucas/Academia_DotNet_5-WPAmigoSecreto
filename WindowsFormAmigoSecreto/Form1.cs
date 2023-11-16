@@ -21,6 +21,8 @@ namespace WindowsFormAmigoSecreto
 
             _amigoSecreto = new();
 
+            Shown += delegate { _pessoa.PopularLista(); };
+
             // Inicio
             button_CadastrarPessoa.Click += delegate { _pessoa.Cadastrar(); };
             button_LimparCampos.Click += delegate { _pessoa.LimparCampos(); };
@@ -33,13 +35,7 @@ namespace WindowsFormAmigoSecreto
 
             // Barra Lateral AmigoSecreto
             button_GerarPares.Click += delegate { _amigoSecreto.GerarAmigoSecreto(listPessoas); };
-            button_FormAmigoSecreto.Click += delegate
-            {
-                MessageBox.Show("Deseja realmente abrir este arquivo?");
-                MessageBox.Show("Você pode estragar a brincadeira");
-                FormAmigoSecreto formAmigoSecreto = new();
-                formAmigoSecreto.Show();
-            };
+            button_FormAmigoSecreto.Click += delegate { _amigoSecreto.EspiarAmigoSecreto(); };
         }
 
         private void textBox_NomeCompleto_KeyPress(object sender, KeyPressEventArgs e)

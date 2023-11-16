@@ -5,10 +5,10 @@ namespace WindowsFormAmigoSecreto
     internal class Util
     {
         /// <summary>
-        /// Metodo estatico de gerar email do usuário
+        /// método estático que recebe um nome completo e cria um email da UFN
         /// </summary>
         /// <param name="nome"></param>
-        /// <returns></returns>
+        /// <returns>email no domínio UFN</returns>
         public static string GerarEmail(string nome)
         {
             string[] vetor = nome.Split(" ");
@@ -16,6 +16,11 @@ namespace WindowsFormAmigoSecreto
             return (vetor[0] + "." + vetor[^1] + "@ufn.com.br").ToLower();
         }
 
+        /// <summary>
+        /// método estático que faz a validação do email passado por parametro
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>retorna verdadeiro caso o email seja valido</returns>
         public static bool EmailIsValid(string email)
         {
             if (string.IsNullOrWhiteSpace(email))

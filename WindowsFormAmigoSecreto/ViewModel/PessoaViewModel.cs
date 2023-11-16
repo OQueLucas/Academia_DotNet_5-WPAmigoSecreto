@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using WindowsFormAmigoSecreto.Model;
+﻿using WindowsFormAmigoSecreto.Model;
 
 namespace WindowsFormAmigoSecreto.ViewModel
 {
@@ -29,6 +28,8 @@ namespace WindowsFormAmigoSecreto.ViewModel
 
                 ListView_pessoas.Items.Add(new ListViewItem(items));
             }
+
+            TextBox_NomeCompleto.Focus();
         }
 
         public void Cadastrar()
@@ -39,6 +40,7 @@ namespace WindowsFormAmigoSecreto.ViewModel
             if (vetor.Length < 2)
             {
                 MessageBox.Show("Insira ao menos nome e sobrenome!", "Nome incompleto");
+                TextBox_NomeCompleto.Focus();
                 return;
             }
 
@@ -63,6 +65,7 @@ namespace WindowsFormAmigoSecreto.ViewModel
             if (ListPessoas.Contains(p))
             {
                 MessageBox.Show("Essa pessoa já foi cadastrada!", "Já cadastrado");
+                TextBox_NomeCompleto.Focus();
                 return;
             }
 
@@ -75,14 +78,35 @@ namespace WindowsFormAmigoSecreto.ViewModel
 
         public void SalvarLista()
         {
-            string path = Interaction.InputBox("Onde gostaria de salvar o arquivo pessoas.csv?", "Digite apenas o caminho!");
-            Persistencia.CSVWriterPessoa(ListPessoas, path);
+            string path = @"F:\workspace";
+
+            DialogResult result = FileLocation.ShowDialog(ref path, "Onde gostaria de salvar o arquivo pessoas.csv?", "Digite apenas o caminho!");
+
+            if (result == DialogResult.OK) {
+                Persistencia.CSVWriterPessoa(ListPessoas, path);
+            }
+        }
+
+        public void PopularLista()
+        {
+            DialogResult result = MessageBox.Show("Deseja popular a lista?", "Bem vindo", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                CarregarLista();
+            }
         }
 
         public void CarregarLista()
         {
-            MessageBox.Show("De onde gostaria de carregar? ");
-            Persistencia.CSVReaderPessoas(ListPessoas);
+            string path = @"F:\workspace";
+
+            DialogResult result = FileLocation.ShowDialog(ref path, "De onde gostaria de carregar?", "Digite apenas o caminho!");
+
+            if (result == DialogResult.OK)
+            {
+                Persistencia.CSVReaderPessoas(ListPessoas, path);
+            }
+
             Load();
         }
 
@@ -98,6 +122,7 @@ namespace WindowsFormAmigoSecreto.ViewModel
             {
                 if (ListPessoas.Count == 0)
                 {
+                    TextBox_NomeCompleto.Focus();
                     throw new Exception("Lista de pessoas vazias");
                 }
 

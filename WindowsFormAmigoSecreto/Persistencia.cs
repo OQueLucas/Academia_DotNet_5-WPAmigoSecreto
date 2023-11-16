@@ -5,15 +5,23 @@ namespace WindowsFormAmigoSecreto
 {
     internal class Persistencia
     {
-        static readonly string pathPessoas = @"..\..\..\Data\pessoas.csv";
+        static readonly string file = @"\pessoas.csv";
         static readonly string pathAmigoSecreto = @"..\..\..\Data\amigoSecreto.csv";
 
-        public static void CSVReaderPessoas(List<Pessoa> pessoas)
+        /// <summary>
+        /// método estático que pega as pessoas salvas no arquivo do caminho selecionado e armazena na lista.
+        /// </summary>
+        /// <param name="listPessoas"></param>
+        /// <param name="Path"></param>
+        public static void CSVReaderPessoas(List<Pessoa> pessoas, string newPath)
         {
             StreamReader? streamReader = null;
+
+                newPath = Path.Combine(newPath + file);
+
             try
             {
-                streamReader = new(pathPessoas, Encoding.UTF8);
+                streamReader = new(newPath, Encoding.UTF8);
 
                 while (!streamReader.EndOfStream)
                 {
@@ -34,35 +42,32 @@ namespace WindowsFormAmigoSecreto
                 streamReader?.Close();
             }
         }
-
+        
+        /// <summary>
+        /// método estático que pega as pessoas salvas no arquivo do caminho selecionado e armazena na lista.
+        /// </summary>
+        /// <param name="listPessoas"></param>
+        /// <param name="Path"></param>
         public static void CSVWriterPessoa(List<Pessoa> listPessoas, string newPath)
         {
             StreamWriter? streamWriter = null;
 
-            if (newPath == "")
+            List<Pessoa> pessoas = new();
+            DialogResult result = DialogResult.Yes;
+
+            CSVReaderPessoas(pessoas, newPath);
+
+            newPath = Path.Combine(newPath + file);
+
+            if (pessoas.Count > 0)
             {
-                newPath = pathPessoas;
+                result = MessageBox.Show($"Lista já populada, deseja refazer?", "", MessageBoxButtons.YesNo);
             }
-            else
+
+            if (result == DialogResult.No)
             {
-                newPath = Path.Combine(newPath + @"\pessoas.csv");
+                return;
             }
-
-            //List<Pessoa> pessoas = new();
-            //DialogResult result = DialogResult.Yes;
-
-
-            //CSVReaderPessoas(pessoas); 
-
-            //if (pessoas.Count > 0)
-            //{
-            //    result = MessageBox.Show($"Lista já populada, deseja refazer?", "", MessageBoxButtons.YesNo);
-            //}
-
-            //if (result == DialogResult.No)
-            //{
-            //    return;
-            //}
 
             try
             {
@@ -83,7 +88,12 @@ namespace WindowsFormAmigoSecreto
             }
         }
 
-        public static void CSVReaderAmigo(List<AmigoSecreto> amigosSecretos)
+        /// <summary>
+        /// método estático que pega os pares de amigos salvas no arquivo do caminho selecionado e armazena na lista.
+        /// </summary>
+        /// <param name="listAmigosSecretos"></param>
+        /// <param name="Path"></param>
+        public static void CSVReaderAmigo(List<AmigoSecreto> listAmigosSecretos)
         {
             StreamReader? streamReader = null;
             try
@@ -96,9 +106,9 @@ namespace WindowsFormAmigoSecreto
                     Pessoa pessoa = new(line[0], line[1]);
                     Pessoa amigo = new(line[2], line[3]);
                     AmigoSecreto amigoSecreto = new(pessoa, amigo);
-                    if (!amigosSecretos.Contains(amigoSecreto))
+                    if (!listAmigosSecretos.Contains(amigoSecreto))
                     {
-                        amigosSecretos.Add(amigoSecreto);
+                        listAmigosSecretos.Add(amigoSecreto);
                     }
                 }
             }
@@ -112,6 +122,11 @@ namespace WindowsFormAmigoSecreto
             }
         }
 
+        /// <summary>
+        /// método estático que pega os pares de amigos salvas no arquivo do caminho selecionado e armazena na lista.
+        /// </summary>
+        /// <param name="listAmigosSecretos"></param>
+        /// <param name="Path"></param>
         public static void CSVWriterAmigo(List<AmigoSecreto> listAmigosSecretos)
         {
             StreamWriter? streamWriter = null;
@@ -133,6 +148,12 @@ namespace WindowsFormAmigoSecreto
             }
         }
 
+        /// <summary>
+        /// método estático procura pessoa na lista a partir do parametro passado.
+        /// </summary>
+        /// <param name="listPessoas"></param>
+        /// <param name="input"></param>
+        /// <returns>pessoa encontrada ou null se não for encontrada</returns>
         public static Pessoa FindPessoa(List<Pessoa> listPessoas, string input)
         {
             Pessoa? pessoa;
@@ -159,6 +180,12 @@ namespace WindowsFormAmigoSecreto
             return pessoa;
         }
 
+        /// <summary>
+        /// método estático procura pessoa na lista a partir do parametro passado.
+        /// </summary>
+        /// <param name="listPessoas"></param>
+        /// <param name="input"></param>
+        /// <returns>verdadeiro se remover a pessoa</returns>
         public static bool RemovePessoa(List<Pessoa> listPessoas, Pessoa pessoa)
         {
             if (pessoa == null)

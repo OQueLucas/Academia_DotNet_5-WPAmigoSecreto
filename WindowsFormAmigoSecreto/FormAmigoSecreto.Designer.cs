@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAmigoSecreto));
+
+
             listView_AmigoSecreto = new ListView();
             columnHeader_Nome = new ColumnHeader();
             columnHeader_Email = new ColumnHeader();
