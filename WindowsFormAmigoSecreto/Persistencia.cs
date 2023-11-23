@@ -5,8 +5,8 @@ namespace WindowsFormAmigoSecreto
 {
     internal class Persistencia
     {
-        static readonly string file = @"\pessoas.csv";
-        static readonly string pathAmigoSecreto = @"..\..\..\Data\amigoSecreto.csv";
+        static readonly string file = @"\amigos.csv";
+        static readonly string pathAmigoSecreto = @"..\..\..\Data\secretos.csv";
 
         /// <summary>
         /// método estático que pega as pessoas salvas no arquivo do caminho selecionado e armazena na lista.
